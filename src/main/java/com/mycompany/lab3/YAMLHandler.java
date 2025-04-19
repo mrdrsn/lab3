@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.lab3;
 
 import java.io.FileInputStream;
@@ -10,14 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
-//import org.apache.commons.exec.ExecuteException;
 import org.yaml.snakeyaml.error.YAMLException;
 
-/**
- *
- * @author nsoko
- */
-public class YAMLHandler {
+public class YAMLHandler extends BaseHandler implements Handler {
+
+    @Override
+    public void handle(String fileName) {
+        if (fileName.endsWith(".yml")) {
+            List<Monster> monsterList = parseYAMLFile(fileName);
+            monsterList.forEach(System.out::println);
+        } else {
+            System.out.println("текущий обработчик не может прочитать файл... передаю запрос следующему...");
+            super.handle(fileName);
+        }
+    }
 
     public static List<Monster> parseYAMLFile(String fileName) {
         List<Monster> monsterList = new ArrayList<>();
@@ -36,20 +38,20 @@ public class YAMLHandler {
                 monster.setDanger(((Number) monsterData.get("danger")).intValue());
                 monster.setLocation((String) monsterData.get("location"));
                 monster.setFirstMention((String) monsterData.get("first_mentioned"));
-                monster.setHeight(monsterData.get("height") instanceof Double ? (Double) monsterData.get("height") : 0.0);
-                monster.setWeight(monsterData.get("weight") instanceof Integer ? (Integer) monsterData.get("weight") : 0);
+                monster.setHeight(monsterData.get("height") instanceof String ? (String) monsterData.get("height") : "не измерим");
+                monster.setWeight(monsterData.get("weight") instanceof String ? (String) monsterData.get("weight") : "не осязаем");
                 monster.setVulnerability(monsterData.get("vulnerability") instanceof String ? (String) monsterData.get("vulnerability") : " ");
                 monster.setImmune((ArrayList<String>) monsterData.get("immune"));
                 monster.setActive((String) monsterData.get("active"));
                 monster.setRecipe((String) monsterData.get("recipe"));
-                monster.setTime((int) monsterData.get("time"));
+                monster.setTime((String) monsterData.get("time"));
                 monster.setEfficiency((String) monsterData.get("efficiency"));
                 monsterList.add(monster);
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (YAMLException e){
+        } catch (YAMLException e) {
             System.out.println("это не yml файл");
         }
         return monsterList;

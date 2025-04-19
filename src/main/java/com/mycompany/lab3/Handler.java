@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.mycompany.lab3;
 
-/**
- *
- * @author nsoko
- */
 public interface Handler {
-    
+    void setNext(Handler h);
+    void handle(String request);
 }

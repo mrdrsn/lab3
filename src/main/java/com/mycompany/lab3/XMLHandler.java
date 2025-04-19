@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.lab3;
 
 import java.io.FileInputStream;
@@ -17,13 +14,18 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-/**
- *
- * @author nsoko
- */
-public class XMLHandler {
-
-    public static List<Monster> parseXMLfile(String fileName) {
+public class XMLHandler extends BaseHandler {
+    @Override
+    public void handle(String fileName){
+        if(fileName.endsWith(".xml")){
+            List<Monster> monsterList = parseXMLFile(fileName);
+            monsterList.forEach(System.out::println);
+        } else{
+            System.out.println("текущий обработчик не может прочитать файл... передаю запрос следующему...");
+            super.handle(fileName);
+        }
+    }
+    public static List<Monster> parseXMLFile(String fileName) {
         List<Monster> monsterList = new ArrayList<>();
         Monster monster = null;
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
@@ -53,34 +55,32 @@ public class XMLHandler {
                         xmlEvent = reader.nextEvent();
                         monster.setFirstMention(xmlEvent.asCharacters().getData());
                     } else if (startElement.getName().getLocalPart().equals("height")) {
-                        xmlEvent = reader.nextEvent();
-                        double heightValue;
-                        try {
-                            heightValue = Double.parseDouble(xmlEvent.asCharacters().getData());
-                        } catch (ClassCastException ex) {
-                            heightValue = 0.0;
+                        xmlEvent = reader.nextEvent(); // Переходим к следующему событию
+                        if (xmlEvent.isCharacters()) { // Проверяем, является ли событие текстовым
+                            String heightValue = xmlEvent.asCharacters().getData().trim();
+                            monster.setHeight(heightValue.isEmpty() ? "не измерим" : heightValue);
+                        } else {
+                            monster.setHeight("не измерим"); // Значение по умолчанию, если нет текста
                         }
-                        monster.setHeight(heightValue);
-//                        monster.setHeight(Double.parseDouble(xmlEvent.asCharacters().getData()));
+//                        monster.setHeight(xmlEvent.asCharacters().getData() instanceof String ? (String) xmlEvent.asCharacters().getData() : "не измерим");
                     } else if (startElement.getName().getLocalPart().equals("weight")) {
                         xmlEvent = reader.nextEvent();
-                        int weightValue;
-                        try{
-                        weightValue = Integer.parseInt(xmlEvent.asCharacters().getData());
-                        } catch(ClassCastException ex){
-                            weightValue = 0;
+                        if (xmlEvent.isCharacters()) {
+                            String weightValue = xmlEvent.asCharacters().getData().trim();
+                            monster.setWeight(weightValue.isEmpty() ? "не указан" : weightValue);
+                        } else {
+                            monster.setWeight("не указан");
                         }
-                        monster.setWeight(weightValue);
-//                        monster.setWeight(Integer.parseInt(xmlEvent.asCharacters().getData()));
+//                        monster.setWeight(xmlEvent.asCharacters().getData() instanceof String ? (String) xmlEvent.asCharacters().getData() : "не осязаем");
                     } else if (startElement.getName().getLocalPart().equals("vulnerability")) {
                         xmlEvent = reader.nextEvent();
-                        String vulnerabilityValue;
-                        try{
-                           vulnerabilityValue = xmlEvent.asCharacters().getData();
-                        } catch(ClassCastException ex){
-                           vulnerabilityValue = " ";
+                        if (xmlEvent.isCharacters()) {
+                            String vulnerabilityValue = xmlEvent.asCharacters().getData().trim();
+                            monster.setVulnerability(vulnerabilityValue.isEmpty() ? "не указан" : vulnerabilityValue);
+                        } else {
+                            monster.setVulnerability("не указан");
                         }
-                        monster.setVulnerability(vulnerabilityValue);
+//                        monster.setVulnerability(xmlEvent.asCharacters().getData() instanceof String ? (String) xmlEvent.asCharacters().getData() : " ");
                     } //immune
                     else if (startElement.getName().getLocalPart().equals("immunity")) {
                         xmlEvent = reader.nextEvent();
@@ -96,7 +96,7 @@ public class XMLHandler {
                     } //time
                     else if (startElement.getName().getLocalPart().equals("time")) {
                         xmlEvent = reader.nextEvent();
-                        monster.setTime(Integer.parseInt(xmlEvent.asCharacters().getData()));
+                        monster.setTime(xmlEvent.asCharacters().getData());
                     } //efficiency
                     else if (startElement.getName().getLocalPart().equals("efficiency")) {
                         xmlEvent = reader.nextEvent();

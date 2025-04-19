@@ -4,6 +4,7 @@
  */
 package com.mycompany.lab3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
 /**
@@ -16,14 +17,15 @@ public class Monster {
     private String description;
     private int danger;
     private String location;
-    private String firstMention;
-    private double height;
-    private int weight;
+    @JsonProperty("first_mentioned")
+    private String firstMentioned;
+    private String height;
+    private String weight;
     private String vulnerability;
     private ArrayList<String> immune;
     private String active;
     private String recipe;
-    private int time;
+    private String time;
     private String efficiency;
     public void setCategory(String category) {
         this.category = category;
@@ -42,13 +44,13 @@ public class Monster {
     }
 
     public void setFirstMention(String firstMention) {
-        this.firstMention = firstMention;
+        this.firstMentioned = firstMention;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(String height) {
         this.height = height;
     }
-    public void setWeight(int weight){
+    public void setWeight(String weight){
         this.weight = weight;
     }
 
@@ -65,7 +67,7 @@ public class Monster {
     public void setRecipe(String recipe){
         this.recipe = recipe;
     }
-    public void setTime(int time){
+    public void setTime(String time){
         this.time = time;
     }
     public void setEfficiency(String efficiency){
@@ -78,7 +80,7 @@ public class Monster {
                 ", description='" + description + '\'' +
                 ", danger=" + danger +
                 ", location='" + location + '\'' +
-                ", firstMention='" + firstMention + '\'' +
+                ", firstMention='" + firstMentioned + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
                 ", vulnerability='" + vulnerability + '\'' +
