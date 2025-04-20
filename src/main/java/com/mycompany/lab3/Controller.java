@@ -4,21 +4,32 @@
  */
 package com.mycompany.lab3;
 
+import java.util.List;
+
 /**
  *
  * @author nsoko
  */
 public class Controller {
 
-    public static void setHandlerChain(String[] fileArray) {
-        XMLHandler xml = new XMLHandler();
-        YAMLHandler yml = new YAMLHandler();
-        JSONHandler json = new JSONHandler();
+    static XMLHandler xml = new XMLHandler();
+    static YAMLHandler yml = new YAMLHandler();
+    static JSONHandler json = new JSONHandler();
+
+    public static void setHandlerChain(String file) {
         xml.setNext(yml);
         yml.setNext(json);
-        for (String file : fileArray) {
-            System.out.println("попытка обработать файл " + file);
-            xml.handle(file);
-        }
+        System.out.println("попытка обработать файл " + file);
+        xml.handle(file);
     }
+    public static List<Monster> getXMLCollection(){
+        return xml.getMonsterList();
+    }
+    public static List<Monster> getYAMLCollection(){
+        return yml.getMonsterList();
+    }
+    public static List<Monster> getJSONCollection(){
+        return json.getMonsterList();
+    }
+    
 }

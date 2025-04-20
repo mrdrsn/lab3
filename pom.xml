@@ -15,7 +15,7 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.23</version> <!-- Убедитесь, что используете последнюю версию -->
+            <version>2.0</version> <!-- Убедитесь, что используете последнюю версию -->
             <type>jar</type>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
@@ -25,4 +25,16 @@
             <version>2.19.0-rc2</version>
         </dependency>
     </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.otf</include>
+                    <include>**/*.ttf</include>
+                    <include>**/*.jpg</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>    
 </project>

@@ -1,0 +1,77 @@
+<monsters>
+	<monster category = "Леший">
+	  <description>Гибрид человека и лесного духа, охраняющий древние рощи.</description>
+	  <danger>7</danger>
+	  <location>Обитает в чащах Брокилона и Эдингеля.</location>
+	  <first_mentioned>1234-06-21</first_mentioned>
+	  <height>3 метра</height>
+	  <weight>300 кг</weight>
+	  <vulnerability>Магия</vulnerability>
+	  <immune>Оглушение, яды</immune>
+	  <active>Ночь</active>
+	  <reciept>корень мандрагоры (3), пепел драконида (1), эссенция полыни.</reciept>
+	  <time>60 минут</time>
+	  <efficiency>Умеренная</efficiency>
+	</monster> 
+	
+	<monster category = "Полуденница">
+	  <description>Призрак, терроризирующий поля во время жатвы.</description>
+	  <danger>5</danger>
+	  <location>Обитает на полях Редании и в амбарах Туссента.</location>
+	  <first_mentioned>1198-07-15</first_mentioned>
+	  <height></height>
+	  <weight>неосязаем</weight>
+	  <vulnerability>Световая магия</vulnerability>
+	  <immune>Кровотечение</immune>
+	  <active>День</active>
+	  <reciept>лепестки лунного цветка (2), серебряная нить (1), экстракт чеснока.</reciept>
+	  <time>30 минут</time>
+	  <efficiency>Высокая</efficiency>
+	</monster> 
+	
+	<monster category = "Катакан">
+	  <description>Крылатый демон с хвостом скорпиона.</description>
+	  <danger>9</danger>
+	  <location>Обитает в горных пещерах Туссента.</location>
+	  <first_mentioned>1150-04-12</first_mentioned>
+	  <height>2 метра</height>
+	  <weight>200 кг</weight>
+	  <vulnerability></vulnerability>
+	  <immune>Огонь, яды</immune>
+	  <active>Сумерки</active>
+	  <reciept>жало мантикоры (4), нефритовая пыль (2), спирт Альберихта.</reciept>
+	  <time>90 минут</time>
+	  <efficiency>Критическая</efficiency>
+	</monster> 
+	
+	<monster category = "Кикимора">
+	  <description>Болотная нежить из гниющих останков.</description>
+	  <danger>6</danger>
+	  <location>Обитает в топях Вендена.</location>
+	  <first_mentioned>1221-09-03</first_mentioned>
+	  <height>1 метр</height>
+	  <weight>15 кг</weight>
+	  <vulnerability>Земляная магия</vulnerability>
+	  <immune>Удушье</immune>
+	  <active>Ночь</active>
+	  <reciept>грибы-поганки (5), глаз василиска (1), роса папоротника (3).</reciept>
+	  <time>45 минут</time>
+	  <efficiency>Средняя</efficiency>
+	</monster> 
+	
+	<monster category = "Элементаль льда">
+	  <description>Дух вечной зимы.</description>
+	  <danger>10</danger>
+	  <location>Обитает в ледниках Ковира.</location>
+	  <first_mentioned>1105-12-01</first_mentioned>
+	  <height>5 метров</height>
+	  <weight>не измерим</weight>
+	  <vulnerability></vulnerability>
+	  <immune>Заморозка, дробление</immune>
+	  <active>Всегда</active>
+	  <reciept>сердце огненного элементаля (1), сера (3), расплавленное железо.</reciept>
+	  <time>120 минут</time>
+	  <efficiency>Переменная</efficiency>
+	</monster> 
+	
+</monsters>

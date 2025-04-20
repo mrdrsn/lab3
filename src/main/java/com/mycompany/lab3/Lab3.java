@@ -5,6 +5,7 @@ package com.mycompany.lab3;
 
 import java.io.IOException;
 import java.util.List;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -27,6 +28,6 @@ public class Lab3 {
 //        for(String file: fileArray){
 //            System.out.println("попытка обработать файл " +file);
 //            xml.handle(file);
-        GUIMonsters gui = new GUIMonsters();
+        SwingUtilities.invokeLater(() -> new GUIMonsters());
     }
 }

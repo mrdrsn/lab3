@@ -9,18 +9,20 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.error.YAMLException;
 
 public class YAMLHandler extends BaseHandler implements Handler {
-
+    private List<Monster> monsterList;
     @Override
     public void handle(String fileName) {
         if (fileName.endsWith(".yml")) {
-            List<Monster> monsterList = parseYAMLFile(fileName);
+            monsterList = parseYAMLFile(fileName);
             monsterList.forEach(System.out::println);
         } else {
             System.out.println("текущий обработчик не может прочитать файл... передаю запрос следующему...");
             super.handle(fileName);
         }
     }
-
+    public List<Monster> getMonsterList(){
+        return this.monsterList;
+    }
     public static List<Monster> parseYAMLFile(String fileName) {
         List<Monster> monsterList = new ArrayList<>();
         try {

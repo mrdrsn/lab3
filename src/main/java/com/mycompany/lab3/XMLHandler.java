@@ -1,4 +1,3 @@
-
 package com.mycompany.lab3;
 
 import java.io.FileInputStream;
@@ -15,18 +14,25 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 public class XMLHandler extends BaseHandler {
+
+    private List<Monster> monsterList;
+
     @Override
-    public void handle(String fileName){
-        if(fileName.endsWith(".xml")){
-            List<Monster> monsterList = parseXMLFile(fileName);
+    public void handle(String fileName) {
+        if (fileName.endsWith(".xml")) {
+            monsterList = parseXMLFile(fileName);
             monsterList.forEach(System.out::println);
-        } else{
+        } else {
             System.out.println("текущий обработчик не может прочитать файл... передаю запрос следующему...");
             super.handle(fileName);
         }
     }
+    @Override
+    public List<Monster> getMonsterList(){
+        return this.monsterList;
+    }
     public static List<Monster> parseXMLFile(String fileName) {
-        List<Monster> monsterList = new ArrayList<>();
+        List<Monster> tempMonsterList = new ArrayList<>();
         Monster monster = null;
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         ArrayList<String> immunitiesList = new ArrayList<>();
@@ -108,14 +114,14 @@ public class XMLHandler extends BaseHandler {
                     if (endElement.getName().getLocalPart().equals("monster")) {
                         monster.setImmune(immunitiesList); // Сохраняем список иммунитетов
                         immunitiesList = new ArrayList<>();
-                        monsterList.add(monster);
+                        tempMonsterList.add(monster);
                     }
                 }
             }
         } catch (FileNotFoundException | XMLStreamException ex) {
             ex.printStackTrace();
         }
-        return monsterList;
+        return tempMonsterList;
     }
 
 }

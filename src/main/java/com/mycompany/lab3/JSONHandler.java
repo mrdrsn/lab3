@@ -6,18 +6,21 @@ import java.io.IOException;
 import java.util.List;
 
 public class JSONHandler extends BaseHandler implements Handler {
+    private List<Monster> monsterList;
 
     @Override
     public void handle(String fileName) {
         if (fileName.endsWith(".json")) {
-            List<Monster> monsterList = parseJSONFile(fileName);
+            monsterList = parseJSONFile(fileName);
             monsterList.forEach(System.out::println);
         } else {
             System.out.println("текущий обработчик не может прочитать файл... передаю запрос следующему...");
             super.handle(fileName);
         }
     }
-
+    public List<Monster> getMonsterList(){
+        return this.monsterList;
+    }
     public static List<Monster> parseJSONFile(String fileName) {
         ObjectMapper mapper = new ObjectMapper();
         MonstersWrapper wrapper = null;
