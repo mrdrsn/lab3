@@ -2,14 +2,20 @@ package com.mycompany.lab3;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.error.YAMLException;
 
 public class YAMLHandler extends BaseHandler implements Handler {
+
     private List<Monster> monsterList;
+
     @Override
     public void handle(String fileName) {
         if (fileName.endsWith(".yml")) {
@@ -20,9 +26,12 @@ public class YAMLHandler extends BaseHandler implements Handler {
             super.handle(fileName);
         }
     }
-    public List<Monster> getMonsterList(){
+
+    @Override
+    public List<Monster> getMonsterList() {
         return this.monsterList;
     }
+
     public static List<Monster> parseYAMLFile(String fileName) {
         List<Monster> monsterList = new ArrayList<>();
         try {
@@ -48,7 +57,9 @@ public class YAMLHandler extends BaseHandler implements Handler {
                 monster.setRecipe((String) monsterData.get("recipe"));
                 monster.setTime((String) monsterData.get("time"));
                 monster.setEfficiency((String) monsterData.get("efficiency"));
+                monster.setSource("yaml");
                 monsterList.add(monster);
+
             }
 
         } catch (FileNotFoundException e) {
@@ -56,6 +67,48 @@ public class YAMLHandler extends BaseHandler implements Handler {
         } catch (YAMLException e) {
             System.out.println("это не yml файл");
         }
+        System.out.println(monsterList);
         return monsterList;
+    }
+
+    public static void exportToYaml(List<Monster> monsters, String filePath) {
+        // Настройка опций вывода YAML
+        DumperOptions options = new DumperOptions();
+        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK); // Использовать блочный стиль
+        options.setPrettyFlow(true); // Добавить отступы
+
+        Yaml yaml = new Yaml(options);
+
+        // Преобразуем список монстров в список карт
+        List<Map<String, Object>> monsterMaps = new ArrayList<>();
+        for (Monster monster : monsters) {
+            Map<String, Object> monsterMap = new LinkedHashMap<>();
+            monsterMap.put("category", monster.getCategory());
+            monsterMap.put("description", monster.getDescription());
+            monsterMap.put("danger", monster.getDanger());
+            monsterMap.put("location", monster.getLocation());
+            monsterMap.put("first_mentioned", monster.getFirstMention());
+            monsterMap.put("height", monster.getHeight());
+            monsterMap.put("weight", monster.getWeight());
+            monsterMap.put("vulnerability", monster.getVulnerability());
+            monsterMap.put("immune", monster.getImmune()); // Убедитесь, что это список
+            monsterMap.put("active", monster.getActive());
+            monsterMap.put("recipe", monster.getRecipe());
+            monsterMap.put("time", monster.getTime());
+            monsterMap.put("efficiency", monster.getEfficiency());
+
+            monsterMaps.add(monsterMap);
+        }
+
+        // Создаем корневую структуру YAML
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put("monsters", monsterMaps);
+
+        try (FileWriter writer = new FileWriter(filePath)) {
+            yaml.dump(data, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка при записи YAML-файла.");
+        }
     }
 }

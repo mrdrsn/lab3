@@ -4,6 +4,7 @@
  */
 package com.mycompany.lab3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,11 +12,11 @@ import java.util.List;
  * @author nsoko
  */
 public class Controller {
-
+    static List<Monster> monsterCollection = new ArrayList<>();
     static XMLHandler xml = new XMLHandler();
     static YAMLHandler yml = new YAMLHandler();
     static JSONHandler json = new JSONHandler();
-
+    
     public static void setHandlerChain(String file) {
         xml.setNext(yml);
         yml.setNext(json);
@@ -30,6 +31,27 @@ public class Controller {
     }
     public static List<Monster> getJSONCollection(){
         return json.getMonsterList();
+    }
+    public static void setMonsters(){
+        if(getXMLCollection() != null){
+            
+        }
+    }
+    public static List<Monster> getMonsters(){
+        return monsterCollection;
+    }
+    public static List<Monster> getMonsters(String chosenFilePath){
+        if(chosenFilePath.endsWith(".xml")){
+            System.out.println("внутри контроллера " +xml.getMonsterList());
+            return getXMLCollection();
+        } else if(chosenFilePath.endsWith(".yml")){
+            System.out.println("внутри контроллера " + yml.getMonsterList());
+            return getYAMLCollection();
+        } else if(chosenFilePath.endsWith(".json")){
+            System.out.println("внутри контроллера " +json.getMonsterList());
+            return getJSONCollection();
+        }
+        return null;
     }
     
 }

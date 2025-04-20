@@ -18,6 +18,7 @@ public class JSONHandler extends BaseHandler implements Handler {
             super.handle(fileName);
         }
     }
+    @Override
     public List<Monster> getMonsterList(){
         return this.monsterList;
     }
@@ -27,6 +28,7 @@ public class JSONHandler extends BaseHandler implements Handler {
         try {
             wrapper = mapper.readValue(new File(fileName), MonstersWrapper.class);
             for (Monster monster : wrapper.getMonsters()) {
+                monster.setSource("json");
                 System.out.println(monster);
             }
         } catch (IOException e) {

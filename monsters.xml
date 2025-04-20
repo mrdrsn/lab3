@@ -9,7 +9,7 @@
 	  <vulnerability>Магия</vulnerability>
 	  <immune>Оглушение, яды</immune>
 	  <active>Ночь</active>
-	  <reciept>корень мандрагоры (3), пепел драконида (1), эссенция полыни.</reciept>
+	  <recipe>корень мандрагоры (3), пепел драконида (1), эссенция полыни.</recipe>
 	  <time>60 минут</time>
 	  <efficiency>Умеренная</efficiency>
 	</monster> 
@@ -24,7 +24,7 @@
 	  <vulnerability>Световая магия</vulnerability>
 	  <immune>Кровотечение</immune>
 	  <active>День</active>
-	  <reciept>лепестки лунного цветка (2), серебряная нить (1), экстракт чеснока.</reciept>
+	  <recipe>лепестки лунного цветка (2), серебряная нить (1), экстракт чеснока.</recipe>
 	  <time>30 минут</time>
 	  <efficiency>Высокая</efficiency>
 	</monster> 
@@ -39,7 +39,7 @@
 	  <vulnerability></vulnerability>
 	  <immune>Огонь, яды</immune>
 	  <active>Сумерки</active>
-	  <reciept>жало мантикоры (4), нефритовая пыль (2), спирт Альберихта.</reciept>
+	  <recipe>жало мантикоры (4), нефритовая пыль (2), спирт Альберихта.</recipe>
 	  <time>90 минут</time>
 	  <efficiency>Критическая</efficiency>
 	</monster> 
@@ -54,7 +54,7 @@
 	  <vulnerability>Земляная магия</vulnerability>
 	  <immune>Удушье</immune>
 	  <active>Ночь</active>
-	  <reciept>грибы-поганки (5), глаз василиска (1), роса папоротника (3).</reciept>
+	  <recipe>грибы-поганки (5), глаз василиска (1), роса папоротника (3).</recipe>
 	  <time>45 минут</time>
 	  <efficiency>Средняя</efficiency>
 	</monster> 
@@ -69,9 +69,83 @@
 	  <vulnerability></vulnerability>
 	  <immune>Заморозка, дробление</immune>
 	  <active>Всегда</active>
-	  <reciept>сердце огненного элементаля (1), сера (3), расплавленное железо.</reciept>
+	  <recipe>сердце огненного элементаля (1), сера (3), расплавленное железо.</recipe>
 	  <time>120 минут</time>
 	  <efficiency>Переменная</efficiency>
 	</monster> 
 	
+	<monster category= "Ракшас">
+      <description>Демоническое существо, питающееся человеческой плотью, способное принимать любую форму.</description>
+      <danger>9</danger>
+      <location>Обитает в джунглях Индии и заброшенных храмах.</location>
+      <first_mentioned>1200-04-15</first_mentioned>
+      <height>2.5 метра</height>
+      <weight>150 кг</weight>
+      <vulnerability>Священные тексты, благовония</vulnerability>
+      <immune>Огонь, яды</immune>
+      <active>Ночь</active>
+      <recipe>Прах благовоний(3), священный песок(2), кровь жертвы.</recipe>
+      <time>90 минут</time>
+      <efficiency>Критическая</efficiency>
+    </monster>
+
+    <monster category= "Кицунэ">
+      <description>Лис-оборотень, обладающий магическими способностями и изменяющий форму.</description>
+      <danger>6</danger>
+      <location>Встречается в лесах Японии.</location>
+      <first_mentioned>794-08-21</first_mentioned>
+      <height>1.5 метра</height>
+      <weight>50 кг</weight>
+      <vulnerability>Святые амулеты</vulnerability>
+      <immune>Иллюзии, контроль разума</immune>
+      <active>Ночь</active>
+      <recipe>Магическая пыль(3), хвост лисы(1), корень женьшеня.</recipe>
+      <time>60 минут</time>
+      <efficiency>Умеренная</efficiency>
+    </monster>
+
+    <monster category="Тэнгу">
+      <description>Дух гор, похожий на человека с птичьим клювом и крыльями.</description>
+      <danger>7</danger>
+      <location>Обитает в горных лесах Японии.</location>
+      <first_mentioned>850-12-03</first_mentioned>
+      <height>2 метра</height>
+      <weight>70 кг</weight>
+      <vulnerability>Металлические клинки</vulnerability>
+      <immune>Страх, гипноз</immune>
+      <active>Сумерки</active>
+      <recipe>Перья тэнгу(4), железная руда(2), священный камень.</recipe>
+      <time>90 минут</time>
+      <efficiency>Критическая</efficiency>
+    </monster>
+
+    <monster category="Бакэко">
+      <description>Призрак в виде летающей головы с длинными волосами.</description>
+      <danger>4</danger>
+      <location>Обитает в заброшенных деревнях Кореи.</location>
+      <first_mentioned>1392-05-17</first_mentioned>
+      <height>0.5 метра</height>
+      <weight>неосязаем</weight>
+      <vulnerability>Свет</vulnerability>
+      <immune>Физические удары</immune>
+      <active>Полночь</active>
+      <recipe>Волосы призрака(3), зола(1), соль.</recipe>
+      <time>30 минут</time>
+      <efficiency>Средняя</efficiency>
+    </monster>
+
+    <monster category="Нуэ">
+      <description>Мистическое существо с телом обезьяны, головой тигра и хвостом змеи.</description>
+      <danger>9</danger>
+      <location>Обитает в горных районах Японии.</location>
+      <first_mentioned>1153-09-28</first_mentioned>
+      <height>1.8 метра</height>
+      <weight>120 кг</weight>
+      <vulnerability>Священные тексты</vulnerability>
+      <immune>Яды, проклятия</immune>
+      <active>Всегда</active>
+      <recipe>Шкура тигра(1), чешуя змеи(3), кровь обезьяны.</recipe>
+      <time>150 минут</time>
+      <efficiency>Переменная</efficiency>
+    </monster>
 </monsters>

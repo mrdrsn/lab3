@@ -2,12 +2,16 @@ package com.mycompany.lab3;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
@@ -27,10 +31,12 @@ public class XMLHandler extends BaseHandler {
             super.handle(fileName);
         }
     }
+
     @Override
-    public List<Monster> getMonsterList(){
+    public List<Monster> getMonsterList() {
         return this.monsterList;
     }
+
     public static List<Monster> parseXMLFile(String fileName) {
         List<Monster> tempMonsterList = new ArrayList<>();
         Monster monster = null;
@@ -113,6 +119,7 @@ public class XMLHandler extends BaseHandler {
                     EndElement endElement = xmlEvent.asEndElement();
                     if (endElement.getName().getLocalPart().equals("monster")) {
                         monster.setImmune(immunitiesList); // Сохраняем список иммунитетов
+                        monster.setSource("xml");
                         immunitiesList = new ArrayList<>();
                         tempMonsterList.add(monster);
                     }
@@ -122,6 +129,88 @@ public class XMLHandler extends BaseHandler {
             ex.printStackTrace();
         }
         return tempMonsterList;
+    }
+
+    public static void exportToXML(List<Monster> monsters, String filePath) {
+        XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
+        FileWriter fileWriter = null;
+        XMLStreamWriter xmlStreamWriter = null;
+
+        try {
+            fileWriter = new FileWriter(filePath);
+            xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(fileWriter);
+
+            // Начало документа
+            xmlStreamWriter.writeStartDocument("UTF-8", "1.0");
+            xmlStreamWriter.writeCharacters("\n"); // Для удобочитаемости
+            xmlStreamWriter.writeStartElement("monsters");
+
+            // Запись каждого монстра
+            for (Monster monster : monsters) {
+                xmlStreamWriter.writeCharacters("\n\t"); // Отступы для удобочитаемости
+                xmlStreamWriter.writeStartElement("monster");
+
+                // Атрибут category
+                if (monster.getCategory() != null) {
+                    xmlStreamWriter.writeAttribute("category", monster.getCategory());
+                }
+
+                // Элемент description
+                writeElement(xmlStreamWriter, "description", monster.getDescription());
+
+                // Элемент danger
+                writeElement(xmlStreamWriter, "danger", String.valueOf(monster.getDanger()));
+
+                // Остальные элементы...
+                writeElement(xmlStreamWriter, "location", monster.getLocation());
+                writeElement(xmlStreamWriter, "first_mentioned", monster.getFirstMention());
+                writeElement(xmlStreamWriter, "height", monster.getHeight());
+                writeElement(xmlStreamWriter, "weight", monster.getWeight());
+                writeElement(xmlStreamWriter, "vulnerability", monster.getVulnerability());
+
+                // Элемент immune
+                if (monster.getImmune() != null && !monster.getImmune().isEmpty()) {
+                    String[] immunities = monster.getImmune().split(",\\s*"); // Разделяем строку по запятым и пробелам
+                    for (String immunity : immunities) {
+                        writeElement(xmlStreamWriter, "immunity", immunity.trim()); // Убираем лишние пробелы
+                    }
+                }
+
+                // Закрытие тега monster
+                xmlStreamWriter.writeEndElement(); // </monster>
+            }
+
+            // Закрытие тега monsters
+            xmlStreamWriter.writeCharacters("\n"); // Для удобочитаемости
+            xmlStreamWriter.writeEndElement(); // </monsters>
+
+            // Конец документа
+            xmlStreamWriter.writeEndDocument();
+
+        } catch (IOException | XMLStreamException e) {
+            e.printStackTrace();
+        } finally {
+            // Закрываем ресурсы
+            try {
+                if (xmlStreamWriter != null) {
+                    xmlStreamWriter.close();
+                }
+                if (fileWriter != null) {
+                    fileWriter.close();
+                }
+            } catch (XMLStreamException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void writeElement(XMLStreamWriter writer, String elementName, String value) throws XMLStreamException {
+        if (value != null && !value.isEmpty()) {
+            writer.writeCharacters("\n\t\t"); // Отступы для удобочитаемости
+            writer.writeStartElement(elementName);
+            writer.writeCharacters(value);
+            writer.writeEndElement();
+        }
     }
 
 }

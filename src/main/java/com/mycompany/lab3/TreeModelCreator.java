@@ -25,7 +25,7 @@ public class TreeModelCreator {
 
         // Создаем JScrollPane
         JScrollPane scrollPane = new JScrollPane(myMonsterTree);
-        scrollPane.setPreferredSize(new Dimension(300, 600));
+//        scrollPane.setPreferredSize(new Dimension(300, 600));
 
         // Устанавливаем полупрозрачный фон для JScrollPane
         scrollPane.setBackground(Color.BLACK); // Полупрозрачный фон

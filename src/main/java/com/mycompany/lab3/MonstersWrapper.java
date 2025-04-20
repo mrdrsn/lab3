@@ -8,6 +8,12 @@ import java.util.List;
 
 public class MonstersWrapper {
     private List<Monster> monsters;
+    MonstersWrapper(){
+        
+    }
+    MonstersWrapper(List<Monster> monsters) {
+        this.monsters = monsters;
+    }
 
     public List<Monster> getMonsters() {
         return monsters;

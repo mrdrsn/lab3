@@ -4,8 +4,8 @@ monsters:
     danger: 7
     location: "Обитает в чащах Брокилона и Эдингеля."
     first_mentioned: "1234-06-21"
-    height: 3
-    weight: 300
+    height: "3 метра"
+    weight: "300 кг"
     vulnerability: "Неуязвим к магии"
     immune:
       - "Оглушение"
@@ -21,7 +21,7 @@ monsters:
     location: "Обитает на полях Редания и в амбарах Туссента."
     first_mentioned: "1198-07-15"
     height: null
-    weight: неосязаем
+    weight: "неосязаем"
     vulnerability: "Световая магия"
     immune:
       - "Кровотечение"
@@ -35,8 +35,8 @@ monsters:
     danger: 9
     location: "Обитает в горных пещерах Туссента."
     first_mentioned: "1150-04-12"
-    height: 2
-    weight: 200
+    height: "2 метра"
+    weight: "200 кг"
     vulnerability: null
     immune:
       - "Огонь"
@@ -51,8 +51,8 @@ monsters:
     danger: 6
     location: "Обитает в топях Вендена."
     first_mentioned: "1221-09-03"
-    height: 1
-    weight: 15
+    height: "1 метр"
+    weight: "15 кг"
     vulnerability: "Земляная магия"
     immune:
       - "Удушье"
@@ -66,7 +66,7 @@ monsters:
     danger: 10
     location: "Обитает в ледниках Ковира."
     first_mentioned: "1105-12-01"
-    height: 5
+    height: "5 метров"
     weight: "не измерим"
     vulnerability: null
     immune:
@@ -75,4 +75,83 @@ monsters:
     active: "Всегда"
     recipe: "Сердце огненного элементаля(1), сера(3), расплавленное железо."
     time: "120 минут"
+    efficiency: "Переменная"
+
+  - category: "Ракшас"
+    description: "Демоническое существо, питающееся человеческой плотью, способное принимать любую форму."
+    danger: 9
+    location: "Обитает в джунглях Индии и заброшенных храмах."
+    first_mentioned: "1200-04-15"
+    height: "2.5 метра"
+    weight: "150 кг"
+    vulnerability: "Священные тексты, благовония"
+    immune:
+      - "Огонь"
+      - "Яды"
+    active: "Ночь"
+    recipe: "Прах благовоний(3), священный песок(2), кровь жертвы."
+    time: "90 минут"
+    efficiency: "Критическая"
+
+  - category: "Кицунэ"
+    description: "Лис-оборотень, обладающий магическими способностями и изменяющий форму."
+    danger: 6
+    location: "Встречается в лесах Японии."
+    first_mentioned: "794-08-21"
+    height: "1.5 метра"
+    weight: "50 кг"
+    vulnerability: "Святые амулеты"
+    immune:
+      - "Иллюзии"
+      - "Контроль разума"
+    active: "Ночь"
+    recipe: "Магическая пыль(3), хвост лисы(1), корень женьшеня."
+    time: "60 минут"
+    efficiency: "Умеренная"
+
+  - category: "Тэнгу"
+    description: "Дух гор, похожий на человека с птичьим клювом и крыльями."
+    danger: 7
+    location: "Обитает в горных лесах Японии."
+    first_mentioned: "850-12-03"
+    height: "2 метра"
+    weight: "70 кг"
+    vulnerability: "Металлические клинки"
+    immune:
+      - "Страх"
+      - "Гипноз"
+    active: "Сумерки"
+    recipe: "Перья тэнгу(4), железная руда(2), священный камень."
+    time: "90 минут"
+    efficiency: "Критическая"
+
+  - category: "Бакэко"
+    description: "Призрак в виде летающей головы с длинными волосами."
+    danger: 4
+    location: "Обитает в заброшенных деревнях Кореи."
+    first_mentioned: "1392-05-17"
+    height: "0.5 метра"
+    weight: "неосязаем"
+    vulnerability: "Свет"
+    immune:
+      - "Физические удары"
+    active: "Полночь"
+    recipe: "Волосы призрака(3), зола(1), соль."
+    time: "30 минут"
+    efficiency: "Средняя"
+
+  - category: "Нуэ"
+    description: "Мистическое существо с телом обезьяны, головой тигра и хвостом змеи."
+    danger: 9
+    location: "Обитает в горных районах Японии."
+    first_mentioned: "1153-09-28"
+    height: "1.8 метра"
+    weight: "120 кг"
+    vulnerability: "Священные тексты"
+    immune:
+      - "Яды"
+      - "Проклятия"
+    active: "Всегда"
+    recipe: "Шкура тигра(1), чешуя змеи(3), кровь обезьяны."
+    time: "150 минут"
     efficiency: "Переменная"

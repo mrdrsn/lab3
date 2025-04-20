@@ -6,7 +6,6 @@ package com.mycompany.lab3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -153,5 +152,9 @@ public class Monster {
     @Override
     public String toString() {
         return this.category;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }
