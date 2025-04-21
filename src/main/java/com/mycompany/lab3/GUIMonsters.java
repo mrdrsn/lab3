@@ -114,7 +114,7 @@ public class GUIMonsters extends JFrame {
     }
 
     private void startProgram() {
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser();      
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
 
         int result = fileChooser.showOpenDialog(GUIMonsters.this);
