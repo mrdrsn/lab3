@@ -205,7 +205,6 @@ public class GUIMonsters extends JFrame {
 
         String filePath;
 
-        // Создание нового файла
         int result = fileChooser.showSaveDialog(null);
         if (result != JFileChooser.APPROVE_OPTION) {
             System.out.println("Сохранение отменено.");

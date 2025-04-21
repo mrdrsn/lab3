@@ -17,23 +17,17 @@ public class TreeModelCreator {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Список загруженных монстров");
         JTree myMonsterTree = new JTree(root);
         myMonsterTree.setPreferredSize(new Dimension(300, 600));
-        myMonsterTree.setBackground(new Color(0, 0, 0, 60)); // Полупрозрачный фон для дерева
-        myMonsterTree.setOpaque(false); // Отключаем непрозрачность
+        myMonsterTree.setBackground(new Color(0, 0, 0, 60)); 
+        myMonsterTree.setOpaque(false); 
 
-        // Устанавливаем собственный рендерер для ячеек дерева
         myMonsterTree.setCellRenderer(new CustomTreeCellRenderer());
 
-        // Создаем JScrollPane
         JScrollPane scrollPane = new JScrollPane(myMonsterTree);
-//        scrollPane.setPreferredSize(new Dimension(300, 600));
 
-        // Устанавливаем полупрозрачный фон для JScrollPane
-        scrollPane.setBackground(Color.BLACK); // Полупрозрачный фон
-//        scrollPane.setOpaque(false); // Отключаем непрозрачность для JScrollPane
+        scrollPane.setBackground(Color.BLACK); 
 
-        // Устанавливаем полупрозрачный фон для Viewport (области просмотра)
-        scrollPane.getViewport().setBackground(new Color(0, 0, 0, 60)); // Полупрозрачный фон
-        scrollPane.getViewport().setOpaque(false); // Отключаем непрозрачность для Viewport
+        scrollPane.getViewport().setBackground(new Color(0, 0, 0, 60)); 
+        scrollPane.getViewport().setOpaque(false); 
 
         return scrollPane;
     }
@@ -45,19 +39,18 @@ public class TreeModelCreator {
             return;
         }
 
-        // Определяем тип файла по расширению
         String fileNodeType = null;
         List<Monster> monsters = null;
 
         if (fileName.endsWith(".xml")) {
             fileNodeType = "XML File";
-            monsters = Controller.getXMLCollection(); // Получаем монстров из XML
+            monsters = Controller.getXMLCollection(); 
         } else if (fileName.endsWith(".yml") || fileName.endsWith(".yaml")) {
             fileNodeType = "YAML File";
-            monsters = Controller.getYAMLCollection(); // Получаем монстров из YAML
+            monsters = Controller.getYAMLCollection(); 
         } else if (fileName.endsWith(".json")) {
             fileNodeType = "JSON File";
-            monsters = Controller.getJSONCollection(); // Получаем монстров из JSON
+            monsters = Controller.getJSONCollection(); 
         }
 
         if (fileNodeType == null || monsters == null) {
@@ -65,16 +58,13 @@ public class TreeModelCreator {
             return;
         }
 
-        // Создаем корневой узел для файла
         DefaultMutableTreeNode fileNode = new DefaultMutableTreeNode(fileNodeType);
 
-        // Добавляем дочерние узлы для каждого монстра
         for (Monster monster : monsters) {
             DefaultMutableTreeNode monsterNode = new DefaultMutableTreeNode(monster);
             fileNode.add(monsterNode);
         }
 
-        // Обновляем модель дерева
         DefaultTreeModel model = (DefaultTreeModel) monsterTree.getModel();
         DefaultMutableTreeNode mainRoot = (DefaultMutableTreeNode) model.getRoot();
         model.insertNodeInto(fileNode, mainRoot, mainRoot.getChildCount());
@@ -102,25 +92,22 @@ public class TreeModelCreator {
 
     private static class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
 
-//        private final Font customFont = new Font("Arial", Font.BOLD, 14); // Кастомный шрифт
         @Override
         public Component getTreeCellRendererComponent(JTree tree, Object value, boolean isSelected, boolean expanded,
                 boolean leaf, int row, boolean hasFocus) {
             super.getTreeCellRendererComponent(tree, value, isSelected, expanded, leaf, row, hasFocus);
 
-            // Устанавливаем кастомный шрифт
             setFont(CustomFontLoader.loadCustomFont(20, "BukyVede-Regular.ttf"));
 
-            // Настройка цветов
             if (isSelected) {
-                setBackgroundSelectionColor(new Color(0, 0, 0, 0)); // Прозрачный фон при выделении
-                setTextSelectionColor(Color.decode("#ab4da6")); // Цвет текста при выделении
+                setBackgroundSelectionColor(new Color(0, 0, 0, 0)); 
+                setTextSelectionColor(Color.decode("#ab4da6")); 
             } else {
-                setBackgroundNonSelectionColor(new Color(0, 0, 0, 0)); // Прозрачный фон для неактивных узлов
-                setForeground(Color.WHITE); // Цвет текста для неактивных узлов
+                setBackgroundNonSelectionColor(new Color(0, 0, 0, 0)); 
+                setForeground(Color.WHITE);
             }
 
-            setOpaque(false); // Отключаем непрозрачность для компонента
+            setOpaque(false); 
 
             return this;
         }

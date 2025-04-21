@@ -67,12 +67,12 @@ public class XMLHandler extends BaseHandler {
                         xmlEvent = reader.nextEvent();
                         monster.setFirstMention(xmlEvent.asCharacters().getData());
                     } else if (startElement.getName().getLocalPart().equals("height")) {
-                        xmlEvent = reader.nextEvent(); // Переходим к следующему событию
-                        if (xmlEvent.isCharacters()) { // Проверяем, является ли событие текстовым
+                        xmlEvent = reader.nextEvent(); 
+                        if (xmlEvent.isCharacters()) { 
                             String heightValue = xmlEvent.asCharacters().getData().trim();
                             monster.setHeight(heightValue.isEmpty() ? "не измерим" : heightValue);
                         } else {
-                            monster.setHeight("не измерим"); // Значение по умолчанию, если нет текста
+                            monster.setHeight("не измерим"); 
                         }
 //                        monster.setHeight(xmlEvent.asCharacters().getData() instanceof String ? (String) xmlEvent.asCharacters().getData() : "не измерим");
                     } else if (startElement.getName().getLocalPart().equals("weight")) {
@@ -118,7 +118,7 @@ public class XMLHandler extends BaseHandler {
                 if (xmlEvent.isEndElement()) {
                     EndElement endElement = xmlEvent.asEndElement();
                     if (endElement.getName().getLocalPart().equals("monster")) {
-                        monster.setImmune(immunitiesList); // Сохраняем список иммунитетов
+                        monster.setImmune(immunitiesList); 
                         monster.setSource("xml");
                         immunitiesList = new ArrayList<>();
                         tempMonsterList.add(monster);
@@ -140,57 +140,46 @@ public class XMLHandler extends BaseHandler {
             fileWriter = new FileWriter(filePath);
             xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(fileWriter);
 
-            // Начало документа
             xmlStreamWriter.writeStartDocument("UTF-8", "1.0");
-            xmlStreamWriter.writeCharacters("\n"); // Для удобочитаемости
+            xmlStreamWriter.writeCharacters("\n"); 
             xmlStreamWriter.writeStartElement("monsters");
 
-            // Запись каждого монстра
             for (Monster monster : monsters) {
-                xmlStreamWriter.writeCharacters("\n\t"); // Отступы для удобочитаемости
+                xmlStreamWriter.writeCharacters("\n\t"); 
                 xmlStreamWriter.writeStartElement("monster");
 
-                // Атрибут category
                 if (monster.getCategory() != null) {
                     xmlStreamWriter.writeAttribute("category", monster.getCategory());
                 }
 
-                // Элемент description
                 writeElement(xmlStreamWriter, "description", monster.getDescription());
 
-                // Элемент danger
                 writeElement(xmlStreamWriter, "danger", String.valueOf(monster.getDanger()));
 
-                // Остальные элементы...
                 writeElement(xmlStreamWriter, "location", monster.getLocation());
                 writeElement(xmlStreamWriter, "first_mentioned", monster.getFirstMention());
                 writeElement(xmlStreamWriter, "height", monster.getHeight());
                 writeElement(xmlStreamWriter, "weight", monster.getWeight());
                 writeElement(xmlStreamWriter, "vulnerability", monster.getVulnerability());
 
-                // Элемент immune
                 if (monster.getImmune() != null && !monster.getImmune().isEmpty()) {
-                    String[] immunities = monster.getImmune().split(",\\s*"); // Разделяем строку по запятым и пробелам
+                    String[] immunities = monster.getImmune().split(",\\s*"); 
                     for (String immunity : immunities) {
-                        writeElement(xmlStreamWriter, "immunity", immunity.trim()); // Убираем лишние пробелы
+                        writeElement(xmlStreamWriter, "immunity", immunity.trim()); 
                     }
                 }
 
-                // Закрытие тега monster
                 xmlStreamWriter.writeEndElement(); // </monster>
             }
 
-            // Закрытие тега monsters
-            xmlStreamWriter.writeCharacters("\n"); // Для удобочитаемости
+            xmlStreamWriter.writeCharacters("\n"); 
             xmlStreamWriter.writeEndElement(); // </monsters>
 
-            // Конец документа
             xmlStreamWriter.writeEndDocument();
 
         } catch (IOException | XMLStreamException e) {
             e.printStackTrace();
         } finally {
-            // Закрываем ресурсы
             try {
                 if (xmlStreamWriter != null) {
                     xmlStreamWriter.close();
@@ -206,7 +195,7 @@ public class XMLHandler extends BaseHandler {
 
     private static void writeElement(XMLStreamWriter writer, String elementName, String value) throws XMLStreamException {
         if (value != null && !value.isEmpty()) {
-            writer.writeCharacters("\n\t\t"); // Отступы для удобочитаемости
+            writer.writeCharacters("\n\t\t"); 
             writer.writeStartElement(elementName);
             writer.writeCharacters(value);
             writer.writeEndElement();

@@ -63,9 +63,9 @@ public class Monster {
 
     public String getImmune() {
         if (immune == null || immune.isEmpty()) {
-            return "Нет иммунитетов"; // Возвращаем сообщение, если список пуст
+            return "Нет иммунитетов"; 
         }
-        return String.join(", ", immune); // Объединяем элементы через запятую
+        return String.join(", ", immune); 
     }
 
     public String getActive() {
@@ -85,13 +85,13 @@ public class Monster {
     }
 
     public String getImagePath() {
-        String imageName = category.toLowerCase() + ".jpg"; // Приводим к нижнему регистру для единообразия
+        String imageName = category.toLowerCase() + ".jpg";
 
         java.net.URL resourceUrl = getClass().getClassLoader().getResource(imageName);
 
         if (resourceUrl == null) {
             System.err.println("Изображение не найдено: " + imageName);
-            return null; // Возвращаем null, если файл не найден
+            return null; 
         }
 
         return resourceUrl.toString();

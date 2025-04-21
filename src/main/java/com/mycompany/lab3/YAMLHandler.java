@@ -72,14 +72,12 @@ public class YAMLHandler extends BaseHandler implements Handler {
     }
 
     public static void exportToYaml(List<Monster> monsters, String filePath) {
-        // Настройка опций вывода YAML
         DumperOptions options = new DumperOptions();
-        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK); // Использовать блочный стиль
-        options.setPrettyFlow(true); // Добавить отступы
+        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK); 
+        options.setPrettyFlow(true); 
 
         Yaml yaml = new Yaml(options);
 
-        // Преобразуем список монстров в список карт
         List<Map<String, Object>> monsterMaps = new ArrayList<>();
         for (Monster monster : monsters) {
             Map<String, Object> monsterMap = new LinkedHashMap<>();
@@ -91,7 +89,7 @@ public class YAMLHandler extends BaseHandler implements Handler {
             monsterMap.put("height", monster.getHeight());
             monsterMap.put("weight", monster.getWeight());
             monsterMap.put("vulnerability", monster.getVulnerability());
-            monsterMap.put("immune", monster.getImmune()); // Убедитесь, что это список
+            monsterMap.put("immune", monster.getImmune()); 
             monsterMap.put("active", monster.getActive());
             monsterMap.put("recipe", monster.getRecipe());
             monsterMap.put("time", monster.getTime());
@@ -100,7 +98,6 @@ public class YAMLHandler extends BaseHandler implements Handler {
             monsterMaps.add(monsterMap);
         }
 
-        // Создаем корневую структуру YAML
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("monsters", monsterMaps);
 

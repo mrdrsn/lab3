@@ -76,11 +76,10 @@ public class GUIDesign {
     }
 
     public static JScrollPane monsterInfoDesign(Monster selectedMonster) {
-        // Создаем панель с GridBagLayout для точного размещения компонентов
         JPanel detailsPanel = new JPanel(new GridBagLayout());
         JScrollPane scrollPane = new JScrollPane(detailsPanel);
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // Отступы между элементами
+        gbc.insets = new Insets(5, 5, 5, 5); 
 
         addEditableComponent(detailsPanel, "Категория: ", selectedMonster.getCategory(), gbc, 0, selectedMonster::setCategory);
         addEditableComponent(detailsPanel, "Описание: ", selectedMonster.getDescription(), gbc, 1, selectedMonster::setDescription);
@@ -107,12 +106,11 @@ public class GUIDesign {
         return scrollPane;
     }
 
-    // Метод для добавления редактируемого компонента с привязкой к полю монстра
     private static void addEditableComponent(JPanel panel, String label, String initialValue, GridBagConstraints gbc, int gridy, java.util.function.Consumer<String> setter) {
-        gbc.gridx = 0; // Все компоненты размещаются в одном столбце
-        gbc.gridy = gridy; // Устанавливаем строку для текущего компонента
-        gbc.fill = GridBagConstraints.HORIZONTAL; // Компонент растягивается по горизонтали
-        gbc.weightx = 1.0; // Компонент занимает все доступное пространство по горизонтали
+        gbc.gridx = 0; 
+        gbc.gridy = gridy; 
+        gbc.fill = GridBagConstraints.HORIZONTAL; 
+        gbc.weightx = 1.0;
 
         JTextArea textArea = createEditableTextArea(label + initialValue);
         textArea.getDocument().addDocumentListener(new DocumentListener() {
@@ -134,9 +132,8 @@ public class GUIDesign {
             private void updateValue() {
                 try {
                     String text = textArea.getText();
-                    // Убираем метку перед значением
                     String value = text.replace(label, "").trim();
-                    setter.accept(value); // Вызываем сеттер для обновления данных
+                    setter.accept(value); 
                 } catch (Exception ex) {
                     System.err.println("Ошибка при обновлении значения: " + ex.getMessage());
                 }
@@ -147,14 +144,15 @@ public class GUIDesign {
     }
 
     private static JTextArea createEditableTextArea(String text) {
+        
         JTextArea textArea = new JTextArea(text);
-        textArea.setLineWrap(true); // Включаем перенос строк
-        textArea.setWrapStyleWord(true); // Перенос по словам (не по символам)
-        textArea.setEditable(true); // Делаем текстовое поле редактируемым
-        textArea.setOpaque(false); // Включаем непрозрачность
-        textArea.setFocusable(true); // Разрешаем фокусировку
+        textArea.setLineWrap(true); 
+        textArea.setWrapStyleWord(true); 
+        textArea.setEditable(true); 
+        textArea.setOpaque(false); 
+        textArea.setFocusable(true); 
         Font customFont = CustomFontLoader.loadCustomFont(16, "BukyVede-Regular.ttf");
-        textArea.setFont(customFont.deriveFont(Font.BOLD)); // Устанавливаем шрифт
+        textArea.setFont(customFont.deriveFont(Font.BOLD)); 
         return textArea;
     }
 

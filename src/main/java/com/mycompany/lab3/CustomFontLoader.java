@@ -14,14 +14,11 @@ public class CustomFontLoader {
                 return null;
             }
 
-            // Создаем шрифт из потока
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
 
-            // Регистрируем шрифт в графической среде
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
 
-            // Возвращаем шрифт с указанным размером
             return customFont.deriveFont(Font.PLAIN, size);
         } catch (FontFormatException e) {
             System.err.println("Неверный формат файла шрифта: " + fontName);
